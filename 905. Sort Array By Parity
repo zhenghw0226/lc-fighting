@@ -1,0 +1,22 @@
+class Solution:
+    def sortArrayByParity(self, A: List[int]) -> List[int]:
+        left = 0
+        right = len(A)-1
+        while left< right:
+            while A[left] %2 == 0 and left < right:
+                left += 1
+            while A[right] %2 == 1 and left < right:
+                right -= 1
+            A[left],A[right] = A[right],A[left]
+            left += 1
+            right -= 1
+        return A
+Time Complexity: O(N)O(N), where NN is the length of A. Each step of the while loop makes j-i decrease by at least one. 
+(Note that while quicksort is O(N \log N)O(NlogN) normally, this is O(N)O(N) because we only need one pass to sort the elements.)
+
+
+class Solution(object):
+    def sortArrayByParity(self, A):
+        A.sort(key = lambda x: x % 2)
+        return A
+Time Complexity: O(N \log N)O(NlogN), where NN is the length of A.
