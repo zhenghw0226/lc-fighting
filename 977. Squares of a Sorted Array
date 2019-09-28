@@ -1,0 +1,41 @@
+# sorted排序
+class Solution:
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        res = []
+        for i in range(len(A)):
+            res.append(A[i]**2)
+        return sorted(res)
+
+class Solution(object):
+    def sortedSquares(self, A):
+        return sorted(x*x for x in A)
+Time Complexity: O(NlogN), where N is the length of A.
+
+
+# 双指针
+class Solution:
+    def sortedSquares(self, A: List[int]) -> List[int]:
+        res = []
+        neg = 0
+        for i in range(len(A)):
+            if A[i] >= 0:
+                neg = i-1
+                break
+        pos = neg + 1
+        
+        while neg >= 0 and pos <= len(A)-1:
+            if A[pos] ** 2 < A[neg] ** 2:
+                res.append(A[pos]**2)
+                pos += 1
+            else:
+                res.append(A[neg]**2)
+                neg -=1
+        
+        while neg >=0:
+            res.append(A[neg]**2)
+            neg -=1
+        while pos <= len(A)-1:
+            res.append(A[pos]**2)
+            pos +=1
+        return res
+        
