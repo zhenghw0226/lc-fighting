@@ -1,0 +1,21 @@
+class Solution:
+    def countCharacters(self, words: List[str], chars: str) -> int:
+        newdict = {}
+        for i in range(len(chars)):
+            if chars[i] in newdict:
+                newdict[chars[i]] +=1
+            else:
+                newdict[chars[i]] = 1
+        count = 0
+        for i in range(len(words)):
+            subcount = 0
+            now_dict = newdict.copy()
+            for j in range(len(words[i])):
+                if words[i][j] in now_dict and now_dict[words[i][j]] != 0:
+                    subcount +=1
+                    now_dict[words[i][j]] -= 1
+                else:
+                    subcount = 0
+                    break
+            count += subcount
+        return count
